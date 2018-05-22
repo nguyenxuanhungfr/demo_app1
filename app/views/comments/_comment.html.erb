@@ -1,0 +1,7 @@
+<div class="media">
+    <div class="media-body">
+      <span class="media-heading"><%= link_to comment.user.name, comment.user %><span>
+      <i><%= time_ago_in_words comment.created_at %> ago.</i>
+      <p><%= comment.content %></p>
+    </div>
+</div>

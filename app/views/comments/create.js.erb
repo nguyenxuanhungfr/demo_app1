@@ -1,0 +1,3 @@
+var entry_id = $("#entry_id").val();
+$(".comment-post"+entry_id).prepend("<%= escape_javascript(render @comment) %>");
+$(".comment-area").val("")

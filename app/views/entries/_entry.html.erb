@@ -1,0 +1,40 @@
+<li id="entry-<%= entry.id %>">
+  <div>
+    <div class="parents">
+      <%= link_to gravatar_for(entry.user, size: 50), entry.user %>
+      <span class="user"><%= link_to entry.user.name, entry.user %></span></br>
+      <i class="timestamp">
+      <%= time_ago_in_words entry.created_at %> ago.
+    </i>
+    </div>
+  <div class="entry-post">
+    <span><span class="title">Title:</span> <%= entry.title %></span>
+    <p class="content"><%= entry.content %></p>
+    <%= form_for @comment, remote: true do |f| %>
+    <div class="btn_comment">Comment</div>
+    <div class="comment-post<%= entry.id %>" >
+      <% if !entry.comments.empty? %>
+        <% entry.comments.each do |f| %>
+        <div class="media">
+          <div class="media-body">
+            <span class="media-heading">
+              <b><%= link_to f.user.name, f.user %></b>
+            </span>
+            <i class="float_right"><%= time_ago_in_words f.created_at %> ago.</i>
+            <p><%= f.content %></p>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.text_area :content, placeholder: "Comment here...", class: "form-control comment-area" %>
+      <div id="entry-id"><%= hidden_field_tag :entry_id, entry.id %></div>
+      <div><%= hidden_field_tag :user_id, entry.user.id %></div>
+    </div>
+    <%= f.submit "Comment", class: "btn btn-primary"%>
+    <% end %>
+  </div>
+  <div>
+</li>
